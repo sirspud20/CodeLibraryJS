@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+
+    Paragraph 1: <input type=text id="iP1">
+    <br>
+    Paragraph 2:<input type=text id="iP2">
+    <br>
+    Author:<input type=text id="iAuthor">
+    <br>
+    <button type="button" onclick="submit()">submit</button>
+    <br>
+    <p1 id="p1">Paragraph 1</p1>
+    <br>
+    <p2 id="p2">Paragraph 2</p2>
+    <div id="author"> author</div>
+    <br>
+    <div id="result">result here</div>
+    <input type=text id="id">
+    <button type="button" onclick="request()">request</button>
+    <script>
+
+        function submit() {
+            var pp1 = document.getElementById("iP1").value;
+            var pp2 = document.getElementById("iP2").value;
+            var aauthor = document.getElementById("iAuthor").value;
+            var myJson = '{"p1":"'+ pp1 + '", "p2":"' + pp2 + '", "author":"' + aauthor + '"}';
+            var strJson = JSON.stringify(myJson);
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                    var jJson = JSON.parse(this.responseText);
+                    document.getElementById("p1").innerHTML = jJson.p1;
+                    document.getElementById("p2").innerHTML = jJson.p2;
+                    document.getElementById("author").innerHTML = jJson.author;
+                    
+                }
+            };
+            xhttp.open("GET", "json_submit.php?q=1&str=" + 
+                myJson, true);
+            xhttp.send();
+            
+        }
+    </script>
+</body>
+
+</html>

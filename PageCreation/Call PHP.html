@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>The XMLHttpRequest Object</h2>
+
+    <p id="demo">Let AJAX change this text.</p>
+
+    <button type="button" onclick="createDB()">create</button>
+    <button type="button" onclick="deleteDB()">delete</button>
+    <script>
+        var act = true;
+        function createDB() {
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "connect_test.php?q=" + act, true);
+            xhttp.send();
+        };
+
+        function deleteDB() {
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "connect_test.php?q=" + act, true);
+            xhttp.send();
+        };
+    </script>
+
+</body>
+
+</html>
